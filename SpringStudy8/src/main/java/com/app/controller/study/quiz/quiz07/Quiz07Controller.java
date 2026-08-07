@@ -14,28 +14,27 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.app.dto.quiz.quiz07.Member;
 
 @Controller
-@RequestMapping("/quiz07")
+@RequestMapping("/quiz07/listTest")
 public class Quiz07Controller {
-	@RequestMapping("/listTest")
-	public String listTest(@RequestParam("type") String type, Model model ) {
+	@RequestMapping("/str")
+	public String str( Model model ) {
+		model.addAttribute("model", "스트링 리스트입니다.");
+
 		
-		
-		if(type.equals("str") ) {
-			model.addAttribute("model", "스트링 리스트입니다.");
-		}
-			
-		if(type.equals("member")) {
-			List<Member> memberList = new ArrayList<Member>();
-			memberList.add(new Member("아이디1", "비번1", "이름1"));
-			memberList.add(new Member("아이디2", "비번2", "이름2"));
-			memberList.add(new Member("아이디3", "비번3", "이름3"));
-			memberList.add(new Member("아이디4", "비번4", "이름4"));
-			memberList.add(new Member("아이디5", "비번5", "이름5"));
-			
-			model.addAttribute("memberList", memberList);
-		}
-		
-		return "quiz/quiz07/listTest";
+		return "quiz/quiz07/listTest/str";
 	}
 	
+	@RequestMapping("/member")
+	public String member( Model model){
+		List<Member> memberList = new ArrayList<Member>();
+		memberList.add(new Member("아이디1", "비번1", "이름1"));
+		memberList.add(new Member("아이디2", "비번2", "이름2"));
+		memberList.add(new Member("아이디3", "비번3", "이름3"));
+		memberList.add(new Member("아이디4", "비번4", "이름4"));
+		memberList.add(new Member("아이디5", "비번5", "이름5"));
+		
+		model.addAttribute("memberList", memberList);
+		
+		return "quiz/quiz07/listTest/member";
+	}
 }

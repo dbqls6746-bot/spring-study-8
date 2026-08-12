@@ -4,7 +4,7 @@ import org.springframework.stereotype.Repository;
 
 import com.app.dao.board.BoardDAO;
 
-@Repository
+@Repository	
 public class BoardDAOImpl implements BoardDAO{
 
 }

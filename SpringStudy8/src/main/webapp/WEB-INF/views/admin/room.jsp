@@ -9,11 +9,10 @@
 </head>
 <body>
 	<h1>관리자페이지</h1>
-	<h2>rooms 객실 목록</h2>
+	<h2>rooms 객실 상세 페이지</h2>
 	
-	<c:forEach var="room" items="${roomList}">
+	<h3>-----------여기는 상세페이지입니다.-----------</h3>
 		<p>
-			<a href="/admin/room/${room.roomId}">
 			${room.roomId} ${room.buildingName} ${room.roomNumber} ${room.floor} ${room.maxGuestCount} ${room.viewType}
 			
 			<c:choose>
@@ -21,9 +20,11 @@
 				<c:when test="${room.viewType == 'CTY' }">시티뷰</c:when>
 				<c:when test="${room.viewType == 'MOT' }">마운틴뷰</c:when>
 			</c:choose>
-			</a>
-			
 		</p>
-	</c:forEach>
+		
+		<div>
+			<button type="button" onclick="location.href='/admin/rooms'">객실목록보기</button>
+		</div>
+
 </body>
 </html>

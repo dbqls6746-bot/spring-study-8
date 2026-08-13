@@ -2,6 +2,8 @@ package com.app.controller.admin;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -83,8 +85,24 @@ public class AdminController {
 		return "admin/room";
 	}
 	
-	
-	
+	//객실정보 삭제
+	//@GetMapping("/admin/removeroom?roomId=3")
+	@GetMapping("/admin/removeRoom")
+	public String removeRoom(HttpServletRequest request) {
+		String roomId = request.getParameter("roomId");
+		
+		if( roomId == null) {
+			// 삭제할 아이디 없을때?
+			return "redriect:/admin/rooms";
+		}
+		
+		int roomIdPk = Integer.parseInt(roomId);
+		int result = roomService.removeRoom(roomIdPk);
+		
+		if(result > 0) { }
+		
+		return "redirect:/admin/rooms";
+	}
 	
 	//관리자가 사용자 계정관리 -> 사용자 계정 임의로 추가
 	@GetMapping("/admin/users/add")

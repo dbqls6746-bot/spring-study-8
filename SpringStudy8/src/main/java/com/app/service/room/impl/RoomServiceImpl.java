@@ -61,4 +61,14 @@ public class RoomServiceImpl implements RoomService {
 		Room room = roomDAO.findRoomByRoomId(roomId);
 		return room;
 	}
+
+	@Override
+	public int removeRoom(int roomId) {
+		
+		//delete 삭제쿼리 -> return 적용된 행의 갯수
+		
+		int result = roomDAO.removeRoom(roomId);
+		
+		return result;
+	}
 }

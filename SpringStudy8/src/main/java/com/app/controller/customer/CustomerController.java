@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 
 import com.app.service.user.UserService;
 
-@Controller
+@Controller("cusController")
 public class CustomerController {
 	
 	//일반 고객 사용자가 접근하는 관련 서비스

@@ -7,6 +7,17 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>main</h1>
+	<h1>main 페이지</h1>
+	
+	<div>
+		<button id = "btn_signup">회원가입하러 가기</button>
+	</div>
+	
+	<script>
+		document.getElementById('btn_signup').addEventListener('click',()=>{
+			location.href = "/customer/signup";
+		})
+		
+	</script>
 </body>
 </html>

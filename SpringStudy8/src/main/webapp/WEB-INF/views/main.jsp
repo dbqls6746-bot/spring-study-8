@@ -11,6 +11,8 @@
 	
 	<div>
 		<button id = "btn_signup">회원가입하러 가기</button>
+		<br>
+		<button type="button" onclick=" location.href='/customer/signin' ">로그인 하러가기</button>
 	</div>
 	
 	<script>

@@ -19,5 +19,10 @@
 		select * 
 		from T_USER
 	</select>
+	
+	<select id="findUserById" resultType="User" parameterType="String">
+		SELECT * FROM T_USER
+		WHERE id = #{id}
+	</select>
 
 </mapper>

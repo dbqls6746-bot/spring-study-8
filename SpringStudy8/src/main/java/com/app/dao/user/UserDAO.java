@@ -10,4 +10,5 @@ public interface UserDAO {
 	int saveUser(User user);
 	
 	public User findUserById(String id);
+	public User checkUserLogin(User user);
 }

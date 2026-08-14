@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.app.common.CommonCode;
 import com.app.dao.user.UserDAO;
 import com.app.dto.user.User;
 import com.app.service.user.UserService;
@@ -28,7 +29,8 @@ public class UserServiceImpl implements UserService {
 		
 		//사용자 계정 추가시 사용 메소드
 		//고객계정으로 추가!
-		user.setUserType("CUS");
+		//user.setUserType("CUS");
+		user.setUserType(CommonCode.USER_USERTYPE_CUSTOMER);
 		
 		int result = userDAO.saveUser(user);
 		
@@ -40,7 +42,8 @@ public class UserServiceImpl implements UserService {
 		
 		//사용자 계정 추가시 사용 메소드
 		//고객계정으로 추가!
-		user.setUserType("ADM");
+		//user.setUserType("ADM");
+		user.setUserType(CommonCode.USER_USERTYPE_ADMIN);
 		
 		int result = userDAO.saveUser(user);
 		

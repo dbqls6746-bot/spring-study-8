@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.app.common.CommonCode;
 import com.app.dao.user.UserDAO;
 import com.app.dto.user.User;
+import com.app.dto.user.UserSearchCondition;
 import com.app.service.user.UserService;
 
 @Service
@@ -106,5 +107,13 @@ public class UserServiceImpl implements UserService {
 		int result = userDAO.modifyPw(user);
 		
 		return result;
+	}
+
+	@Override
+	public List<User> findUserListBySearchCondition(UserSearchCondition userSearchCondition) {
+		
+		List<User> userList = userDAO.findUserListBySearchCondition(userSearchCondition);
+		
+		return userList;
 	}
 }

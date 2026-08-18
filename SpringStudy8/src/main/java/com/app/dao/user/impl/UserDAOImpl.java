@@ -44,4 +44,11 @@ public class UserDAOImpl implements UserDAO {
 		return loginUser;
 	}
 
+	@Override
+	public int modifyPw(User user) {
+		int result = sqlSessionTemplate.update("user_mapper.modifyPw", user);
+		
+		return result;
+	}
+
 }

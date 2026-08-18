@@ -1,5 +1,6 @@
 package com.app.controller.customer;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.app.common.CommonCode;
+import com.app.dto.room.Room;
 import com.app.dto.user.User;
 import com.app.service.user.UserService;
 import com.app.util.LoginManager;
@@ -117,5 +119,71 @@ public class CustomerController {
 		LoginManager.logout(session);
 		
 		return "redirect:/main";
+	}
+	
+	@GetMapping("/customer/modifyPw")
+	public String modifyPw(HttpSession session, Model model) {
+		
+		if( LoginManager.isLogin(session)) {
+			String loginUserId = LoginManager.getLoginUserId(session);
+			User user = userService.findUserById(loginUserId);
+			model.addAttribute("user", user);
+			return "customer/modifyPw";
+		}else {
+			return "redirect:/customer/signin";
+		}
+		
+		
+	}
+	
+	@PostMapping("/customer/modifyPw")
+	public String modifyPwAction( User user,HttpSession session) {
+		
+		
+		int result = userService.modifyPw(user);
+		
+		if(result > 0) { 
+			session.invalidate();
+			return "redirect:/customer/signin";
+		} else { 
+			return "redirect:/customer/modifyPw";	
+		}
+	}
+	
+	@GetMapping("/customer/modifyPw2")
+	public String modifyPw2() {
+		return "customer/modifyPw2";
+	}
+	
+	@GetMapping("/customer/modifyPw2")
+	public String modifyPw2Action(User user, HttpSession session) {
+		
+		// user 객체에는 사용자가 입력한 바꿀 비번(pw) 데이터 1개만 존재
+		// 비번 바꾸려는 사용자 pk	id 필요/세팅
+		
+		// mypage -> 비번변경 페이지
+		// 로그인O -> session 로그인 사용자 아이디 존재
+		
+		// set pw = ?
+		// where id = ?
+		
+		user.setId( LoginManager.getLoginUserId(session));
+		
+		//user 객체
+		//로그인한 id
+		//바꿀 pw
+		
+		System.out.println(user);
+		
+		int result = userService.modifyPw(user);
+		
+		if(result > 0) { 
+			session.invalidate();
+			return "redirect:/customer/signin";
+		} else { 
+			return "redirect:/customer/modifyPw2";	
+		}
+		
+
 	}
 }

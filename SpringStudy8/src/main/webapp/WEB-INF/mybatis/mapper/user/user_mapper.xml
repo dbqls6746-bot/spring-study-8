@@ -32,5 +32,12 @@
 		AND pw = #{pw}
 		AND user_type = #{userType}
 	</select>
+	
+	<update id="modifyPw" parameterType="User">
+		UPDATE T_USER
+		SET
+    		pw = #{pw}
+		WHERE ID = #{id}
+	</update>
 
 </mapper>

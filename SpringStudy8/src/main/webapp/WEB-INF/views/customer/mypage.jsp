@@ -14,6 +14,8 @@
 	<p>이름 : ${user.name}</p>
 	<p>
 		<a href = "/main">메인페이지로 이동</a>
+		<br/>
+		<button type="button" onclick=" location.href='/customer/modifyPw' ">비밀번호변경하기</button>
 	</p>
 </body>
 </html>

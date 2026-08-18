@@ -155,7 +155,7 @@ public class CustomerController {
 		return "customer/modifyPw2";
 	}
 	
-	@GetMapping("/customer/modifyPw2")
+	@PostMapping("/customer/modifyPw2")
 	public String modifyPw2Action(User user, HttpSession session) {
 		
 		// user 객체에는 사용자가 입력한 바꿀 비번(pw) 데이터 1개만 존재

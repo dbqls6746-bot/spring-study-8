@@ -11,7 +11,9 @@
 	<h1>비밀번호 변경 페이지</h1>
 	
 	
-	<form action="/customer/modifyPw" method = "post">	
+	<form action="/customer/modifyPw" method = "post">
+		<input type = "hidden" name="id" value="${user.id}">
+	
 		변경할 비번 : <input type="password" name="pw"><br>
 		<button type="submit">비밀번호 변경하기</button>
 		<button type="button" onclick=" location.href='/customer/mypage' ">마이페이지로 이동하기</button>

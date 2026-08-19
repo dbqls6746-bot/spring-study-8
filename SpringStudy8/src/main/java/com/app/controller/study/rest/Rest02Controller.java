@@ -113,4 +113,9 @@ public class Rest02Controller {
 		
 		return user; //객체 리턴이 알아서 json format 변형
 	}
+	
+	@GetMapping("/rest/rest10")
+	public String rest10() {
+		return "단순 텍스트 return 합니다";
+	}
 }

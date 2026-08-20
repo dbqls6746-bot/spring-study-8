@@ -31,7 +31,7 @@ public class RoomServiceImpl implements RoomService {
 	@Override
 	public List<Room> findRoomList() {
 		
-		System.out.println("RoomServiceImpl findRommList");
+		System.out.println("RoomServiceImpl findRoomList");
 		
 		//핵심 비즈니스 로직	|	서비스 로직
 		

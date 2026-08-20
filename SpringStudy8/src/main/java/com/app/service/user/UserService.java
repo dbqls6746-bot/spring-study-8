@@ -20,4 +20,6 @@ public interface UserService {
 	public User findUserById(String id);
 	
 	public int modifyPw(User user);
+	
+	public boolean isDuplicated(String id);
 }

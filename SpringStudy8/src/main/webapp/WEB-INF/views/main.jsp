@@ -6,6 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+	<style>
+		/*css 코드*/
+		/* h1 { color:red;} */
+	</style>
+	<link href = "/css/main.css" rel="stylesheet">
 </head>
 <body>
 	<h1>main 페이지</h1>
@@ -25,11 +30,17 @@
 		</c:if>	
 	</div>
 	
+	<div>
+		<img src="/images/ocean.jpg	">
+	</div>
+	
+	<script src="/js/main.js"></script>
 	<script>
 		document.getElementById('btn_signup').addEventListener('click',()=>{
 			location.href = "/customer/signup";
 		})
 		
+		//javascript
 	</script>
 </body>
 </html>

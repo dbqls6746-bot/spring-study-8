@@ -62,7 +62,8 @@ http://www.springframework.org/schema/context/spring-context.xsd">
 		
 		<interceptor>
 			<mapping path="/admin/**"/>
-	
+			<exclude-mapping path="/admin/signin"/>
+			<exclude-mapping path="/admin/users"/>
 			<beans:bean class="com.app.interceptor.AdminInterceptor"></beans:bean>
 		</interceptor>
 	</interceptors>

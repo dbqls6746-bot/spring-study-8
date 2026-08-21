@@ -3,6 +3,7 @@ package com.app.controller.admin;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,12 +16,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.app.common.CommonCode;
 import com.app.dto.room.Room;
 import com.app.dto.room.RoomSearchCondition;
 import com.app.dto.user.User;
 import com.app.dto.user.UserSearchCondition;
 import com.app.service.room.RoomService;
 import com.app.service.user.UserService;
+import com.app.util.LoginManager;
 
 @Controller
 public class AdminController {
@@ -213,22 +216,32 @@ public class AdminController {
 	}
 	
 	@GetMapping("/admin/users")
-	public String users(Model model, UserSearchCondition userSearchCondition) {
+	public String users(Model model, UserSearchCondition userSearchCondition,HttpSession session) {
 		
 		//검색조건
 		// 검색조건 O -> 조건 검색 결과
 		// 검색조건 X -> 전체 조회
-		System.out.println(userSearchCondition);
 		
-		//List<User> userList = userService.findUserList();
-		List<User> userList = userService.findUserListBySearchCondition(userSearchCondition);
+		if (LoginManager.isLogin(session)) {
+			String loginUserId = LoginManager.getLoginUserId(session);
+
+			User user = userService.findUserById(loginUserId);
+
+			model.addAttribute("user", user);
+			
+			System.out.println(userSearchCondition);
+			
+			//List<User> userList = userService.findUserList();
+			List<User> userList = userService.findUserListBySearchCondition(userSearchCondition);
+			
+			
+			model.addAttribute("userList", userList);
+			model.addAttribute("userSearchCondition", userSearchCondition);
+			
+			return "admin/users";
+		}
 		
-		
-		model.addAttribute("userList", userList);
-		model.addAttribute("userSearchCondition", userSearchCondition);
-		
-		
-		return "admin/users";
+		return "redirect:/admin/signin";
 	}
 	
 	@GetMapping("/admin/user/{id}")
@@ -264,5 +277,42 @@ public class AdminController {
 		} else {  //수정실패 -> 다시 수정 페이지
 			return "redirect:/admin/modifyUser/" + user.getId();
 		}
+	}
+	
+	@GetMapping("/admin/signin")
+	public String signin() {
+		return "admin/signin";
+	}
+
+	@PostMapping("/admin/signin")
+	public String signinAction(User user, HttpSession session) {
+
+
+		log.info("로그인시 입력한 값");
+		log.info(user);
+
+	
+
+		user.setUserType(CommonCode.USER_USERTYPE_ADMIN);
+		User loginUser = userService.checkUserLogin(user);
+
+		if (loginUser == null) { 
+			System.out.println("로그인실패");
+			return "admin/signin";
+		} else { 
+			log.info("로그인성공");
+			System.out.println(loginUser);
+
+			LoginManager.setSessionLoginUserId(session, loginUser.getId());
+
+			return "redirect:/admin/users"; 
+		}
+	}
+	
+	@GetMapping("/admin/signout")
+	public String signout(HttpSession session) {
+		LoginManager.logout(session);
+
+		return "redirect:/main";
 	}
 }
